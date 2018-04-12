@@ -2,6 +2,7 @@ package be.vdab.web;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -67,8 +68,8 @@ class BrouwerController {
 	}
 	
 	@GetMapping
-	ModelAndView brouwers() {
-		return new ModelAndView(BROUWERS_VIEW, "brouwers", brouwerService.findAll());
+	ModelAndView brouwers(Pageable pageable) {
+		return new ModelAndView(BROUWERS_VIEW, "page", brouwerService.findAll(pageable));
 	}
 	
 	@GetMapping("opalfabet")

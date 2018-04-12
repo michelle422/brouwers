@@ -12,17 +12,24 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Nummer</th>
-				<th>Naam</th>
-				<th>Straat</th>
-				<th>HuisNr</th>
-				<th>Postcode</th>
-				<th>Gemeente</th>
-				<th>Omzet</th>
+				<th><c:url value="" var="url"><c:param name="sort" value="id"/></c:url>
+					<a href="${url}">Nummer</a></th>
+				<th><c:url value="" var="url"><c:param name="sort" value="naam"/></c:url>
+					<a href="${url}">Naam</a></th>
+				<th><c:url value="" var="url"><c:param name="sort" value="adres.straat"/></c:url>
+					<a href="${url}">Straat</a></th>
+				<th><c:url value="" var="url"><c:param name="sort" value="adres.huisNr"/></c:url>
+					<a href="${url}">HuisNr</a></th>
+				<th><c:url value="" var="url"><c:param name="sort" value="adres.postcode"/></c:url>
+					<a href="${url}">Postcode</a></th>
+				<th><c:url value="" var="url"><c:param name="sort" value="adres.gemeente"/></c:url>
+					<a href="${url}">Gemeente</a></th>
+				<th><c:url value="" var="url"><c:param name="sort" value="omzet"/></c:url>
+					<a href="${url}">Omzet</a></th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${brouwers}" var="brouwer">
+			<c:forEach items="${page.content}" var="brouwer">
 				<tr>
 					<td>${brouwer.id}</td>
 					<td>${brouwer.naam}</td>
@@ -35,5 +42,21 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<p class='pagineren'>
+		<c:forEach var="pageNr" begin="1" end="${page.totalPages}">
+			<c:choose>
+				<c:when test="${pageNr-1 == page.number}">
+					${pageNr}
+				</c:when>
+				<c:otherwise>
+					<c:url value="" var="url">
+						<c:param name="page" value="${pageNr-1}"/>
+						<c:param name="sort" value="${param.sort}"/>
+					</c:url>
+					<a href="${url}">${pageNr}</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	</p>
 </body>
 </html>
