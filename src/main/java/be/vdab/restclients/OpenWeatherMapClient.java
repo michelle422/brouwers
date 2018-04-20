@@ -26,8 +26,8 @@ class OpenWeatherMapClient implements WeerClient {
 	@Override
 	public BigDecimal getTemperatuur(String plaats) {
 		try {
-			return restTemplate.getForObject(openWeatherURL, Gemeente.class, plaats)
-					.temperatuur.value;
+			return restTemplate.getForObject(openWeatherURL, Current.class, plaats)
+					.temperature.value;
 		} catch (RestClientException ex) {
 			LOGGER.log(Level.SEVERE, "kan temperatuur niet lezen", ex);
 			throw new KanTemperatuurNietLezenException();
